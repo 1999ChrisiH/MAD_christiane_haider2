@@ -35,7 +35,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MovieProjectTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
@@ -69,7 +68,6 @@ fun TopAppBar() {
     ) {
         Column(
             modifier = Modifier
-                //.background(color = Color.Red)
                 .size(100.dp)
                 .padding(15.dp), verticalArrangement = Arrangement.Center
         ) {
