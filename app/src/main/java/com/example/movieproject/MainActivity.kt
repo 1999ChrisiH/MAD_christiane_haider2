@@ -15,10 +15,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -66,22 +63,32 @@ fun DefaultPreview() {
 }
 
 @Composable
-fun TopAppBar(){
-    Row(modifier = Modifier
-        .fillMaxWidth()
-        .height(60.dp)
-        .background(color = Color(0xFF155081))) {
-        Column(modifier = Modifier
-            //.background(color = Color.Red)
-            .size(100.dp)
-            .padding(15.dp), verticalArrangement = Arrangement.Center){
+fun TopAppBar() {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(60.dp)
+            .background(color = Color(0xFF155081))
+    ) {
+        Column(
+            modifier = Modifier
+                //.background(color = Color.Red)
+                .size(100.dp)
+                .padding(15.dp), verticalArrangement = Arrangement.Center
+        ) {
 
-            Text(text = "Movies", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color.White)
+            Text(
+                text = "Movies",
+                fontSize = 21.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
         }
         Spacer(modifier = Modifier.weight(1f))
-        Column (modifier = Modifier
-            .size(50.dp, 60.dp)
-            , verticalArrangement = Arrangement.Center){
+        Column(
+            modifier = Modifier
+                .size(50.dp, 60.dp), verticalArrangement = Arrangement.Center
+        ) {
 
             DropDown()
         }
@@ -89,17 +96,13 @@ fun TopAppBar(){
 }
 
 @Composable
-fun DropDown(){ //tutorial from https://semicolonspace.com/dropdown-menu-jetpack-compose/
-
-    val items = arrayOf("Favorites")
-    val disableItem = 1
-    val contextForToast = LocalContext.current.applicationContext
+fun DropDown() {
 
     var expanded by remember {
         mutableStateOf(false)
     }
 
-    Box(contentAlignment = Alignment.CenterStart){
+    Box(contentAlignment = Alignment.CenterStart) {
         IconButton(onClick = {
             expanded = true
         }) {
@@ -107,17 +110,13 @@ fun DropDown(){ //tutorial from https://semicolonspace.com/dropdown-menu-jetpack
         }
 
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            items.forEachIndexed { itemIndex, itemValue ->
-                DropdownMenuItem(
-                    onClick = {
-                        Toast.makeText(contextForToast, itemValue, Toast.LENGTH_SHORT)
-                            .show()
-                        expanded = false
-                    },
-                    enabled = (itemIndex != disableItem)
-                ) {
-                    Text(text = itemValue, fontSize = 17.sp, fontWeight = FontWeight.SemiBold)
-                }
+            DropdownMenuItem(
+                onClick = {
+
+                },
+            ) {
+                Icon(imageVector = Icons.Filled.Favorite, contentDescription = "filled heart")
+                Text(text = "  Favorites", fontSize = 20.sp, fontWeight = FontWeight.Bold)
             }
         }
     }
@@ -126,7 +125,9 @@ fun DropDown(){ //tutorial from https://semicolonspace.com/dropdown-menu-jetpack
 @Composable
 fun MovieAttributes(movie: Movie) {
     Column(
-        modifier = Modifier.padding(5.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        modifier = Modifier
+            .padding(5.dp), verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
         Text(text = "Year: ${movie.year}", fontSize = 20.sp)
         Text(text = "Genre: ${movie.genre}", fontSize = 20.sp)
         Text(text = "Director: ${movie.director}", fontSize = 20.sp)
@@ -160,7 +161,7 @@ fun MovieRow(movies: Movie) {
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(10.dp)), Alignment.Center
             ) {
-                var randomPic by remember{
+                var randomPic by remember {
                     mutableStateOf(Random.nextInt(movies.images.size - 1))
                 }
 
@@ -187,7 +188,8 @@ fun MovieRow(movies: Movie) {
                             icon = Icons.Default.KeyboardArrowUp
                         }
                     }
-                    .size(60.dp).padding(15.dp),
+                    .size(60.dp)
+                    .padding(15.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
