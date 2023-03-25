@@ -109,7 +109,7 @@ fun DropDown() {
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             DropdownMenuItem(
                 onClick = {
-
+                          // learning diary 3
                 },
             ) {
                 Icon(imageVector = Icons.Filled.Favorite, contentDescription = "filled heart")
