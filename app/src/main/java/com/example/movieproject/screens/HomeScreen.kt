@@ -12,6 +12,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,17 +30,17 @@ import com.example.movieproject.models.getMovies
 import kotlin.random.Random
 
 @Composable
-fun HomeScreen(navController: NavController){
+fun HomeScreen(navController: NavController) {
 
 
     Column {
-        TopAppBarHome()
+        TopAppBarHome(navController)
         MovieList(navController = navController)
     }
 }
 
 @Composable
-fun TopAppBarHome() {
+fun TopAppBarHome(navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -64,13 +65,13 @@ fun TopAppBarHome() {
             modifier = Modifier
                 .size(50.dp, 60.dp), verticalArrangement = Arrangement.Center
         ) {
-            DropDown()
+            DropDown(navController)
         }
     }
 }
 
 @Composable
-fun DropDown() {
+fun DropDown(navController: NavController) {
 
     var expanded by remember {
         mutableStateOf(false)
@@ -86,7 +87,7 @@ fun DropDown() {
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             DropdownMenuItem(
                 onClick = {
-                    // learning diary 3
+                    navController.navigate(Screen.FavoriteScreen.route)
                 },
             ) {
                 Icon(imageVector = Icons.Filled.Favorite, contentDescription = "filled heart")
@@ -242,13 +243,12 @@ fun MovieRow(movies: Movie, onItemClick: (String) -> Unit) {
 fun MovieList(movies: List<Movie> = getMovies(), navController: NavController) {
     LazyColumn() {
         items(movies) { movie ->
-            MovieRow(movie){
-                movieId ->
+            MovieRow(movie) { movieId ->
                 //Log.d("MainContent", "Value: $movieId")
                 navController.navigate(
                     route = Screen.DetailScreen.setArgs(
                         movieId = movie.id
-                            )
+                    )
                 )
             }
         }

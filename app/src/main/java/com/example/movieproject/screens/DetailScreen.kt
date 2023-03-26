@@ -37,7 +37,8 @@ fun DetailScreen(navController: NavController, movieId: String) {
 
             Text(text = "Movie Images", fontSize = 20.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center, modifier = Modifier
                 .fillMaxWidth()
-                .size(40.dp))
+                .size(55.dp)
+                .padding(14.dp))
 
             LazyRow {
                 items(movie.images) { item ->
@@ -81,12 +82,12 @@ fun TopAppBarDetail(title: String, navController: NavController) {
                 color = Color.White
             )
         }
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.weight(2f))
         Column(
             modifier = Modifier
                 .size(50.dp, 60.dp), verticalArrangement = Arrangement.Center
         ) {
-            DropDown()
+            DropDown(navController)
         }
     }
 }
