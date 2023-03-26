@@ -60,22 +60,25 @@ fun TopAppBarDetail(title: String, navController: NavController) {
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                //.size(100.dp)
+                .size(70.dp)
                 .padding(5.dp), verticalArrangement = Arrangement.Center
         ) {
             IconButton(onClick = { navController.navigateUp() }) {
                 Icon(
                     imageVector = Icons.Rounded.ArrowBack,
-                    contentDescription = null,
+                    contentDescription = "Arrow Back",
                     tint = Color.White
                 )
             }
+
+        }
+        Column(modifier = Modifier
+            .width(250.dp)
+            .padding(15.dp)){
             Text(
                 text = title,
                 fontSize = 21.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White,
+                color = Color.White
             )
         }
         Spacer(modifier = Modifier.weight(1f))
